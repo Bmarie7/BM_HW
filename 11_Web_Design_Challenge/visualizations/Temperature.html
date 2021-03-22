@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Lat Analysis-Temperature</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
+        <div class="container"><a class="navbar-brand" href="../index.html">Latitude Analysis</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">Plots</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="Cloudiness.html">Cloudiness</a>
+                            <a class="dropdown-item" href="Humidity.html">Humidity</a>
+                            <a class="dropdown-item" href="Temperature.html">Temperature</a>
+                            <a class="dropdown-item" href="Wind Speed.html">Wind Speed</a></div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="../comparison.html">Comparisons</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../data.html">Data</a></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="text-center text-white masthead">
+        <div class="masthead-content">
+            <div class="container">
+                <!-- <h1 class="masthead-heading mb-0">Latitude vs Weather</h1> -->
+                <h2 class="masthead-subheading mb-0">Latitude vs Maximum Temperature</h2>
+                <h6>This page provides an indepth description of latitude vs max temperatures.</h6>
+                <p><a class="btn btn-primary" role="button" href="../comparison.html">Other Comparisons</a></p>
+            </div>
+        </div>
+        <div class="bg-circle-5 bg-circle2"></div>
+        <div class="bg-circle-6 bg-circle2"></div>
+        <div class="bg-circle-7 bg-circle2"></div>
+        <div class="bg-circle-8 bg-circle2"></div>
+    </header>
+    <main>
+        <section>
+            <div class="container" id="graphs">
+                <div class="jumbotron">
+                    <h1>Temperature (°F)</h1>
+                    <article>
+                        <img class="rounded-circle img-fluid" src="../assets/img/temp.png" />
+                        <hr>
+                        <p>In this plot we see an arch forming as cities closer to the equator record higher temperatures.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container" id="graphs">
+                <div class="jumbotron">
+                    <h1>Temperature by Hemisphere</h1>
+                    <article>
+                        <div class="col-xl-12 offset-xl-1">
+                            <h4>Northern Hemisphere</h4>
+                            <img class="rounded-circle img-fluid" src="../assets/img/NH_temp.png" />
+                            <h4>Southern Hemisphere Hemisphere</h4>
+                            <img src="../assets/img/SH_Temp.png" /></div>
+                        <hr>
+                        <p>With the data seperated by hemisphere we see there are significantly more cities in the northern hemisphere than in the southern hemisphere. In the northern hemisphere, more cities are closer to the trend line compared to the osuthern
+                            hemisphere.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="py-5 bg-black">
+        <div class="container">
+            <p class="text-center text-white m-0 small">Copyright © Brand 2021</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
