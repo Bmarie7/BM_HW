@@ -1,30 +1,49 @@
 function buildMetadata(sample) {
+    // use d3 to slect panel with ID
     d3.json(`/metadata/${sample}`).then((data) => {
         var metadata = data.metadata;
 
-        var rArray = metadata.filter(sampleObj => sampleObj == sample);
-        var results = rArray[0];
-
         var PANEL = d3.select("#sample-metadata");
 
+        //clear any existing data
         PANEL.html("");
 
-        Object.defineProperties(results).forEach(([key, value]) => {
-            PANEL.append("h6").text(`${key.toUpperCase()}:${value}`);
+        Object.entries(data).forEach(([key, value]) => {
+            PANEL.append("h6").text(`${key}:${value}`);
+            console.log(key, value);
         });
     });
 }
 
 function buildChart(sample) {
-    d3.json(`/metadata/${sample}`).then((data) => {
+    d3.json(`/samples/${sample}`).then((data) => {
 
-            var samples = data.samples;
-            var rArray = metadata.filter(sampleObj => sampleObj == sample);
-            var results = rArray[0];
+            var sample_values = data.sample_values;
+            var otu_ids = data.otu_ids;
+            var otu_labels = data.otu_labels;
+            console.log(otu_ids, otu_labels, sample_values);
 
-            var sample_values = results.sample_values;
-            var otu_ids = result.otu_ids;
-            var otu_labels = results.otu_labels;
+            // Create a bubble chart that displays each sample.
+
+            var bubbleData = [{
+                x = otu_ids,
+                y = sample_values,
+                mode = "markers",
+                marker = {
+                    size = sample_values * 10,
+                    color = otu_ids,
+                    colorscale: "Electric"
+                }
+            }];
+
+            var bubbleLayout = {
+                title: "Bacteria Cultures per Sample",
+                margin: { t: 0 },
+                hovermode: "closest",
+                xaxis: { title: "OTU ID" }
+            };
+
+            Plotly.newPlot('bubble', bubbleData, bubbleLayout);
 
             // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
             // -Use sample_values as the values for the bar chart.
@@ -49,27 +68,6 @@ function buildChart(sample) {
             };
 
             Plotly.newPlot('bar', barData, barLayout);
-
-            // Create a bubble chart that displays each sample.
-
-            var bubbleData = [{
-                x = otu_ids,
-                y = sample_values,
-                mode = "markers",
-                marker = {
-                    size = sample_values * 10,
-                    color = otu_ids,
-                    colorscale: "electric"
-                }
-            }];
-
-            var bubbleLayout = {
-                title: "Bacteria Cultures per Sample"
-                hovermode: "closest",
-                xaxis: (title: "OTU ID")
-            };
-
-            Plotly.newPlot('bubble', bubbleData, bubbleLayout)
         };
     }
 
@@ -77,10 +75,7 @@ function buildChart(sample) {
 
         var selector = d3.select("#selDataset");
 
-
-        d3.json("samples.json").then((data) => {
-            var sampleNames = data.names;
-
+        d3.json("/names").then((sampleNames) => {
             sampleNames.forEach((sample) => {
                 selector
                     .append("option")
