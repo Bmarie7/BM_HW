@@ -1,12 +1,11 @@
-from bs4.element import DEFAULT_OUTPUT_ENCODING
 import pandas as pd
-from splinter import Browser, browser
+from splinter import Browser
 from bs4 import BeautifulSoup
 import os
 import time
 import snscrape.modules.twitter as sntwitter
 
-import requests as r
+import requests
 
 # Executable path to Chrome Driver
 def init_browser():
@@ -14,51 +13,52 @@ def init_browser():
     return Browser('chrome', **executable_path, headless=False)
 
 def scrape():
-    final_data = {}
-    output = marsNews()
-    final_data["title"] = output[0]
-    final_data["paragraph"] = output[1]
-    final_data["image"] = marsJPL()
-    final_data["weather"] = marsWx()
-    final_data["facts"] = marsFacts()
-    final_data["hemisphere"] = marsHemi()
+    browser=Browser("chrome", executable_path="chromedriver",headless=True)
+    news_title,news_p =marsNews(browser)
+
+    final_data = {
+        
+        "title":news_title,
+        "paragraph" : news_p,
+        "image" : marsJPL(browser),
+        "weather" : marsWx(browser),
+        "facts" : marsFacts(browser),
+        "hemisphere" : marsHemi(browser)
+    }
+    browser.quit()
 
     return final_data
     
-def marsNews():
+def marsNews(browser):
     """NASA NEWS"""
-    browser=init_browser()
 
     # visit url
     url_nasa='https://mars.nasa.gov/news/'
     browser.visit(url_nasa)
 
+    browser.is_element_present_by_css('ul.item_list li.slide')
+
     # HTML obj.
-    html=browser_nasa.html
+    html=browser.html
 
     nasa_soup=BeautifulSoup(html,'html.parser')
 
-    locate=nasa_soup.select_one('ul.item_list li.slide')
-    
-    # Scrape the NASA Mars News Site and collect the latest News Title and Paragraph Text. 
-    news_title=locate.find('div',class_='content_title').get_text()
-    news_p= locate.find('div', class_='article_teaser_body').get_text()
+    try:
+        locate=nasa_soup.select_one('ul.item_list li.slide')
+        
+        # Scrape the NASA Mars News Site and collect the latest News Title and Paragraph Text. 
+        news_title=locate.find('div',class_='content_title').get_text()
+        news_p= locate.find('div', class_='article_teaser_body').get_text()
 
-    browser.quit()
-   
-    output=(f'Title: {news_title}\nText: {news_p}')
+    except AttributeError:
+        return None,None
 
-    return output
 
-def marsJPL():
+    return news_title,news_p
+
+def marsJPL(browser):
     """JPL Mars Featured Images"""
-
-    browser=init_browser()
-
-    # visit url
-    url_jpl="https://www.jpl.nasa.gov/images?search=&category=Mars"
-    browser.visit(url_jpl)
-
+    
     # visit url
     url_jpl="https://www.jpl.nasa.gov/images?search=&category=Mars"
     browser.visit(url_jpl)
@@ -79,7 +79,7 @@ def marsWx():
 
     # Query by text search
     # Setting variables to be used below
-    # maxTweets = 4
+    maxTweets = 4
 
     # Creating list to append tweet data to
     tweets_list = []
