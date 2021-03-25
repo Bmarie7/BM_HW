@@ -70,12 +70,13 @@ def marsJPL(browser):
     
     featured_image_url=jpl_soup.find('img',class_='BaseImage')['src']
     
-    browser.quit()
-
     return featured_image_url
 
-def marsWx():
+def marsWx(browser):
     """Mars Weather from Twitter Posts"""
+
+    url_wx="https://twitter.com/marswxreport?lang=en"
+    browser.visit(url_wx)
 
     # Query by text search
     # Setting variables to be used below
@@ -109,7 +110,7 @@ def marsFacts():
     
     return mars_facts_df
 
-def marsHemi():
+def marsHemi(html_text):
     """Mars Hemisphere Images"""
 
     browser=init_browser()
@@ -121,7 +122,7 @@ def marsHemi():
     # HTML obj.
     html=browser.html
 
-    hemi_soup=BeautifulSoup(html,'html.parser')
+    hemi_soup=BeautifulSoup(html_text,'html.parser')
 
     findImg=hemi_soup.find('div',class_='result-list')
     hemispheres=findImg.find_all('div',class_='item')
@@ -153,5 +154,9 @@ def marsHemi():
 
     return hemisphere_image_urls
 
+if __name__ == "__main__":
+    
+    # If running as script, print scraped data
+    print(scrape())
 
 
