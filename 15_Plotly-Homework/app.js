@@ -3,12 +3,15 @@ function buildMetadata(sample) {
     d3.json(`/metadata/${sample}`).then((data) => {
         var metadata = data.metadata;
 
+        var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+        var result = resultArray[0];
+
         var PANEL = d3.select("#sample-metadata");
 
         //clear any existing data
         PANEL.html("");
 
-        Object.entries(data).forEach(([key, value]) => {
+        Object.entries(result).forEach(([key, value]) => {
             PANEL.append("h6").text(`${key}:${value}`);
             console.log(key, value);
         });
@@ -88,13 +91,12 @@ function buildChart(sample) {
             buildCharts(firstSample);
             buildMetadata(firstSample);
         });
+
+        function optionChanged(newSample) {
+            buildCharts(newSample);
+            buildMetadata(newSample);
+        }
+
+        // Initialize the dashboard
+        init();
     }
-
-    function optionChanged(newSample) {
-
-        buildCharts(newSample);
-        buildMetadata(newSample);
-    }
-
-    // Initialize the dashboard
-    init();
