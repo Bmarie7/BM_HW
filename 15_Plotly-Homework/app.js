@@ -46,7 +46,7 @@ function buildChart(sample) {
                 xaxis: { title: "OTU ID" }
             };
 
-            Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+            Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
             // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
             // -Use sample_values as the values for the bar chart.
@@ -70,7 +70,7 @@ function buildChart(sample) {
                 barmode: 'stack'
             };
 
-            Plotly.newPlot('bar', barData, barLayout);
+            Plotly.newPlot("bar", barData, barLayout);
         };
     }
 
