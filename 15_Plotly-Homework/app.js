@@ -91,12 +91,12 @@ function buildChart(sample) {
             buildCharts(firstSample);
             buildMetadata(firstSample);
         });
-
-        function optionChanged(newSample) {
-            buildCharts(newSample);
-            buildMetadata(newSample);
-        }
-
-        // Initialize the dashboard
-        init();
     }
+
+    function optionChanged(newSample) {
+        buildCharts(newSample);
+        buildMetadata(newSample);
+    }
+
+    // Initialize the dashboard
+    init();
