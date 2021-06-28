@@ -1,6 +1,6 @@
-function buildMetadata(sample) {
+function buildMetadata(samples) {
     // use d3 to slect panel with ID
-    d3.json(`/metadata/${sample}`).then((data) => {
+    d3.json("samples.json").then((data) => {
         var metadata = data.metadata;
 
         var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
@@ -18,8 +18,8 @@ function buildMetadata(sample) {
     });
 }
 
-function buildChart(sample) {
-    d3.json(`/samples/${sample}`).then((data) => {
+function buildChart(samples) {
+    d3.json("samples.json").then((data) => {
 
             var sample_values = data.sample_values;
             var otu_ids = data.otu_ids;
